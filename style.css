@@ -1,0 +1,1247 @@
+/* ============================================================
+   NUESTRO UNIVERSO — Para Mi Amor ❤️
+   Estilos: diseño, animaciones y responsive
+   ============================================================ */
+
+/* ---------- Variables / Paleta ---------- */
+:root {
+  --deep-black: #05060f;
+  --night-blue: #0b1026;
+  --purple: #2a1659;
+  --purple-light: #6d4a9e;
+  --soft-pink: #ffb6c1;
+  --soft-pink-strong: #ff85a2;
+  --gold: #e8c27a;
+  --gold-light: #f7e0ac;
+  --white: #ffffff;
+  --text-soft: #c9c9e0;
+  --text-muted: #8a8aa8;
+
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-soft: 0 8px 40px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 30px rgba(232, 194, 122, 0.35);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--deep-black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Evitar overflow horizontal en cualquier dispositivo */
+img,
+svg,
+canvas {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* ---------- Canvas de fondo espacial ---------- */
+#space-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 20%, var(--night-blue) 0%, var(--deep-black) 75%);
+}
+
+/* ---------- Secciones ---------- */
+.section {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.section.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.section-centered {
+  text-align: center;
+}
+
+/* Pantalla de bienvenida visible por defecto */
+.section.welcome {
+  text-align: center;
+  align-items: center;
+}
+
+/* ---------- Tipografía ---------- */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-shadow: 0 0 25px rgba(232, 194, 122, 0.25);
+}
+
+.section-subtitle {
+  color: var(--text-soft);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  margin-bottom: 48px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.section-eyebrow {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  letter-spacing: 6px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(232, 194, 122, 0.4);
+}
+
+.heart {
+  display: inline-block;
+  animation: heartbeat 1.8s ease-in-out infinite;
+  color: var(--soft-pink-strong);
+}
+
+.emoji {
+  font-size: 0.8em;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: transform var(--transition), box-shadow var(--transition),
+    background var(--transition), color var(--transition);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--purple-light), var(--purple));
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 45px rgba(109, 74, 158, 0.5);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-soft);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 0.82rem;
+  padding: 10px 24px;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Botón con brillo pulsante */
+.btn-glow {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 25px rgba(232, 194, 122, 0.25), var(--shadow-soft); }
+  50% { box-shadow: 0 0 45px rgba(232, 194, 122, 0.55), var(--shadow-soft); }
+}
+
+/* ---------- Pantalla de bienvenida ---------- */
+.welcome-content {
+  max-width: 700px;
+  padding: 0 20px;
+}
+
+.welcome-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+  animation: fadeUp 1.2s ease-out both;
+}
+
+.welcome-subtitle {
+  color: var(--text-soft);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  margin-bottom: 48px;
+  animation: fadeUp 1.2s 0.3s ease-out both;
+}
+
+.welcome .btn {
+  animation: fadeUp 1.2s 0.6s ease-out both;
+}
+
+/* ---------- Sección 1: Feliz cumpleaños ---------- */
+.birthday-content {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.birthday-content .section-eyebrow {
+  animation: lettersIn 1.8s ease-out both;
+}
+
+.birthday-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 400;
+  margin-bottom: 32px;
+  text-shadow: 0 0 50px rgba(255, 133, 162, 0.4);
+  animation: fadeUp 1.4s 0.3s ease-out both;
+}
+
+.birthday-message {
+  color: var(--text-soft);
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  line-height: 1.9;
+  margin-bottom: 48px;
+  animation: fadeUp 1.4s 0.6s ease-out both;
+}
+
+.birthday-content .btn {
+  animation: fadeUp 1.4s 0.9s ease-out both;
+}
+
+/* ---------- Navegación entre secciones ---------- */
+.section-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  max-width: 620px;
+}
+
+/* ---------- Galería ---------- */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  max-width: 1100px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.photo-card {
+  flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
+  padding: 12px 12px 42px;
+  background: linear-gradient(180deg, #fdfcfb, #ece9e3);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform var(--transition), box-shadow var(--transition);
+  transform: rotate(var(--rot, 0deg));
+  will-change: transform;
+}
+
+.photo-card:nth-child(odd) { --rot: -2.5deg; }
+.photo-card:nth-child(even) { --rot: 2deg; }
+.photo-card:nth-child(3n) { --rot: -1deg; }
+.photo-card:nth-child(4n) { --rot: 3deg; }
+
+/* Tamaños alternados (formato polaroid) */
+.photo-card:nth-child(1),
+.photo-card:nth-child(4),
+.photo-card:nth-child(7) { width: 300px; }
+
+.photo-card:nth-child(2),
+.photo-card:nth-child(5),
+.photo-card:nth-child(8) { width: 240px; }
+
+.photo-card:nth-child(3),
+.photo-card:nth-child(6) { width: 270px; }
+
+.photo-card:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 182, 193, 0.2);
+  z-index: 5;
+}
+
+.photo-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 2px;
+  transition: transform 0.5s ease;
+}
+
+.photo-card:hover img {
+  transform: scale(1.03);
+}
+
+.photo-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #4a4a55;
+}
+
+/* Animación de aparición al hacer scroll */
+.fade-in-view {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-view.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Placeholder elegante para fotografías faltantes */
+.photo-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: radial-gradient(circle at 50% 30%, #3a2a6e, var(--night-blue));
+  border-radius: 2px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.photo-placeholder .icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.25));
+}
+
+/* -------- Loading galería -------- */
+.gallery-loading {
+  width: 100%;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 40px 0;
+  letter-spacing: 2px;
+}
+
+.gallery-loading .dots {
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 20% { opacity: 0.3; }
+  50% { opacity: 1; }
+  80%, 100% { opacity: 0.3; }
+}
+
+.gallery-loading.hidden {
+  display: none;
+}
+
+/* ---------- Línea del tiempo ---------- */
+.timeline {
+  position: relative;
+  max-width: 720px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, var(--purple-light), var(--gold), transparent);
+  opacity: 0.6;
+}
+
+.timeline-event {
+  position: relative;
+  width: 50%;
+  padding: 0 40px 48px;
+}
+
+.timeline-event:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-event:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 15px rgba(232, 194, 122, 0.8);
+}
+
+.timeline-event:nth-child(odd)::before {
+  right: -7px;
+}
+
+.timeline-event:nth-child(even)::before {
+  left: -7px;
+}
+
+.event-date {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--gold-light);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 15px rgba(232, 194, 122, 0.35);
+}
+
+.event-text {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.event-star {
+  position: absolute;
+  top: 6px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.timeline-event:nth-child(odd) .event-star {
+  right: -20px;
+}
+
+.timeline-event:nth-child(even) .event-star {
+  left: -20px;
+}
+
+/* ---------- Cualidades ---------- */
+.qualities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.quality-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.quality-card::before {
+  content: '✦';
+  display: block;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+  transition: transform 0.4s ease;
+}
+
+.quality-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(109, 74, 158, 0.25);
+}
+
+.quality-card:hover::before {
+  transform: scale(1.3);
+}
+
+.quality-card:nth-child(2n)::before { color: var(--soft-pink-strong); }
+.quality-card:nth-child(3n)::before { color: var(--purple-light); }
+
+/* Animación de aparición una por una */
+.quality-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease, background var(--transition),
+    box-shadow var(--transition);
+}
+
+.quality-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Carta ---------- */
+.letter-container {
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+}
+
+.letter-paper {
+  position: relative;
+  background: linear-gradient(170deg, #fdf8ec, #f5ead2);
+  color: #4a3a2a;
+  border-radius: 8px;
+  padding: 40px 36px;
+  min-height: 320px;
+  max-height: 550px;
+  overflow-y: auto;
+  margin: 32px auto;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6), inset 0 0 80px rgba(232, 194, 122, 0.18);
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 2;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+.letter-paper::-webkit-scrollbar {
+  width: 4px;
+}
+.letter-paper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.letter-paper::-webkit-scrollbar-thumb {
+  background: #c9a86a;
+  border-radius: 4px;
+}
+
+/* Efecto de borde decorativo de la carta */
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(232, 194, 122, 0.35);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.letter-text {
+  display: inline;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.letter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: #c9a86a;
+  font-weight: bold;
+  animation: blink 0.9s step-end infinite;
+}
+
+.letter-cursor.hidden {
+  display: none;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ---------- Constelación ---------- */
+.constellation-section {
+  position: relative;
+  min-height: 100vh;
+}
+
+.constellation-title {
+  position: relative;
+  z-index: 2;
+}
+
+.constellation {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.constellation circle {
+  fill: var(--gold-light);
+  filter: url(#glow);
+}
+
+.constellation line {
+  stroke: rgba(232, 194, 122, 0.35);
+  stroke-width: 0.1;
+}
+
+.constellation-text {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  padding: 30px;
+  text-align: center;
+  background: rgba(5, 6, 15, 0.5);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.constellation-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+  line-height: 1.9;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.constellation-quote.accent {
+  color: var(--gold-light);
+}
+
+.constellation-hearts {
+  font-size: 1.5rem;
+  margin-top: 14px;
+  letter-spacing: 12px;
+}
+
+/* ---------- Tarta / Vela ---------- */
+.birthday-scene {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.make-a-wish {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  margin-bottom: 48px;
+  letter-spacing: 1px;
+}
+
+.cake {
+  position: relative;
+  margin: 0 auto 48px;
+  width: 260px;
+  cursor: pointer;
+}
+
+.cake-candle {
+  position: absolute;
+  top: -72px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+}
+
+.candle {
+  width: 12px;
+  height: 52px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #7cc5f5, #ffffff, #7cc5f5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.flame {
+  width: 20px;
+  height: 30px;
+  margin-bottom: 4px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: radial-gradient(circle at 50% 75%, #ffdf80 0%, #ff9d3c 50%, #ff6b35 75%, transparent 100%);
+  box-shadow: 0 0 20px rgba(255, 157, 60, 0.8), 0 0 45px rgba(255, 140, 50, 0.5);
+  transform-origin: 50% 90%;
+  animation: flicker 0.18s ease-in-out infinite alternate;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+@keyframes flicker {
+  0% { transform: scaleY(1) rotate(-1.5deg) scaleX(1); }
+  100% { transform: scaleY(1.08) rotate(2deg) scaleX(0.95); }
+}
+
+.flame.out {
+  opacity: 0;
+  transform: scale(0.2);
+  pointer-events: none;
+}
+
+/* Humo después de apagar la vela */
+.smoke {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(200, 200, 210, 0.6);
+  animation: smokeRise 2.5s ease-out forwards;
+}
+
+@keyframes smokeRise {
+  0% { opacity: 0.7; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--drift, 10px), -120px) scale(2.5); }
+}
+
+/* Tarta */
+.cake-top {
+  width: 240px;
+  height: 48px;
+  background: linear-gradient(180deg, #ffd7e3, #ffb6c1);
+  border-radius: 10px 10px 4px 4px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Detalle de la capa superior */
+.cake-top::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 0 0 4px 4px;
+}
+
+.cake-middle {
+  width: 200px;
+  height: 56px;
+  background: linear-gradient(180deg, #d9a0e8, #b87fd4);
+  margin: 0 auto;
+  border-radius: 6px 6px 3px 3px;
+}
+
+.cake-bottom {
+  width: 180px;
+  height: 44px;
+  background: linear-gradient(180deg, #9ad0f5, #6aa8d8);
+  margin: 0 auto;
+  border-radius: 6px 6px 12px 12px;
+}
+
+/* ---------- Mensaje final ---------- */
+.final-message {
+  margin-top: 48px;
+  animation: fadeUp 1.5s ease-out both;
+}
+
+.final-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin-bottom: 24px;
+  text-shadow: 0 0 45px rgba(255, 133, 162, 0.5);
+}
+
+.final-text {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--text-soft);
+  margin-bottom: 14px;
+}
+
+.final-signature {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3.5vw, 2rem);
+  color: var(--gold-light);
+  margin-top: 36px;
+  letter-spacing: 2px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 6, 15, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  backdrop-filter: blur(8px);
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 78vh;
+  border-radius: 8px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+  object-fit: contain;
+  animation: lightboxIn 0.45s ease-out both;
+}
+
+@keyframes lightboxIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-caption {
+  color: var(--text-soft);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 2rem;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 1001;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* ---------- Reproductor de música ---------- */
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(10, 12, 30, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  padding: 8px 14px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, opacity 0.5s ease;
+}
+
+.music-player.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.music-btn {
+  font-size: 1.3rem;
+  background: none;
+  border: none;
+  padding: 4px;
+  transition: transform 0.3s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.15);
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.music-control {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.music-control:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.1);
+}
+
+.music-note {
+  position: fixed;
+  bottom: 24px;
+  right: 90px;
+  color: var(--gold-light);
+  font-size: 1.1rem;
+  opacity: 0.9;
+  animation: noteFloat 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(-8px); opacity: 0.5; }
+}
+
+/* ---------- Capa de efectos (confeti, corazones) ---------- */
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fx-particle {
+  position: absolute;
+  pointer-events: none;
+  animation: particleFall linear forwards;
+}
+
+.fx-heart {
+  font-size: 20px;
+  animation: heartFloatUp linear forwards;
+}
+
+.fx-confetti {
+  width: 10px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes particleFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes heartFloatUp {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  15% { opacity: 1; }
+  50% { transform: translateY(-50vh) scale(1.1); }
+  100% { transform: translateY(-105vh) scale(0.8); opacity: 0; }
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0.6; }
+}
+
+/* Explosión de estrellas */
+.fx-star {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 10px rgba(232, 194, 122, 0.9);
+  animation: starBurst 1.2s ease-out forwards;
+}
+
+@keyframes starBurst {
+  0% {
+    transform: translate(var(--x0), var(--y0)) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x1), var(--y1)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* ---------- Transición cinematográfica ---------- */
+.transition-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--deep-black);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.transition-shade.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ---------- Animaciones de entrada ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lettersIn {
+  from { opacity: 0; letter-spacing: 14px; filter: blur(6px); transform: scale(0.95); }
+  to { opacity: 1; letter-spacing: 6px; filter: blur(0); transform: scale(1); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.18); }
+  30% { transform: scale(0.95); }
+  45% { transform: scale(1.12); }
+  60% { transform: scale(1); }
+}
+
+/* ---------- Respetar preferencia de menos animación ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .flame {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .timeline-event {
+    padding: 0 30px 44px;
+  }
+
+  .timeline::before {
+    left: 14px;
+  }
+
+  .timeline-event,
+  .timeline-event:nth-child(odd),
+  .timeline-event:nth-child(even) {
+    width: 100%;
+    left: 0;
+    text-align: left;
+    padding-left: 46px;
+  }
+
+  .timeline-event::before,
+  .timeline-event:nth-child(odd)::before,
+  .timeline-event:nth-child(even)::before {
+    left: 8px;
+    right: auto;
+  }
+
+  .timeline-event .event-star,
+  .timeline-event:nth-child(odd) .event-star,
+  .timeline-event:nth-child(even) .event-star {
+    display: none;
+  }
+}
+
+/* Celulares */
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 16px;
+  }
+
+  .btn {
+    padding: 14px 26px;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .section-actions {
+    gap: 12px;
+  }
+
+  .btn-ghost {
+    max-width: 220px;
+  }
+
+  /* Galería: fotos a ancho completo */
+  .photo-card,
+  .photo-card:nth-child(1),
+  .photo-card:nth-child(2),
+  .photo-card:nth-child(3),
+  .photo-card:nth-child(4),
+  .photo-card:nth-child(5),
+  .photo-card:nth-child(6),
+  .photo-card:nth-child(7),
+  .photo-card:nth-child(8) {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .gallery {
+    gap: 22px;
+  }
+
+  .photo-card:nth-child(odd) { --rot: -1.5deg; }
+  .photo-card:nth-child(even) { --rot: 1.5deg; }
+
+  /* Carta */
+  .letter-paper {
+    padding: 30px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* Tarta */
+  .cake {
+    transform: scale(0.85);
+  }
+
+  /* Reproductor */
+  .music-player {
+    bottom: 14px;
+    right: 14px;
+    padding: 6px 12px;
+  }
+
+  .music-control {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+
+  /* Constelación */
+  .constellation-text {
+    padding: 20px;
+    margin: 0 12px;
+  }
+
+  /* Lightbox */
+  .lightbox img {
+    max-width: 94%;
+    max-height: 70vh;
+  }
+
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.6rem;
+  }
+}
+
+/* Pantallas grandes: 4 fotos por fila */
+@media (min-width: 1200px) {
+  .gallery {
+    max-width: 1320px;
+    gap: 30px;
+  }
+}
+
+/* Mejora animación nota musical ♪ */
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; }
+  25% { transform: translateY(-6px) translateX(4px) rotate(-3deg); opacity: 0.7; }
+  50% { transform: translateY(-10px) translateX(-2px) rotate(2deg); opacity: 0.5; }
+  75% { transform: translateY(-5px) translateX(3px) rotate(-1deg); opacity: 0.7; }
+}
+
+/* iPhone SE y pantallas muy pequeñas */
+@media (max-width: 380px) {
+  .welcome-title {
+    font-size: 2rem;
+  }
+
+  .birthday-name {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .letter-paper {
+    min-height: 260px;
+  }
+
+  .cake {
+    transform: scale(0.75);
+  }
+}

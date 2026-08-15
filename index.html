@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nuestro Universo — Para Mi amor ❤️" />
+  <title>Nuestro Universo — Para Mi Amor ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Fondo animado (canvas) -->
+  <canvas id="space-canvas" aria-hidden="true"></canvas>
+
+  <!-- Reproductor de música flotante -->
+  <div id="music-player" class="music-player hidden" aria-label="Reproductor de música">
+    <button id="music-btn" class="music-btn" aria-label="Reproducir o pausar música">🎵</button>
+    <div class="music-controls">
+      <button id="play-pause-btn" class="music-control" aria-label="Reproducir o pausar">▶</button>
+      <button id="mute-btn" class="music-control" aria-label="Silenciar o activar sonido">🔊</button>
+    </div>
+    <span id="music-note" class="music-note hidden">♪</span>
+  </div>
+
+  <!-- ============================================================
+       PANTALLA INICIAL — BIENVENIDA
+  ============================================================ -->
+  <section id="welcome" class="section welcome active">
+    <div class="welcome-content">
+      <h1 class="welcome-title">Para Michelle <span class="heart">❤️</span></h1>
+      <p class="welcome-subtitle">Hoy quiero regalarte algo diferente...</p>
+      <button id="open-gift-btn" class="btn btn-primary btn-glow">ABRIR MI REGALO ✨</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 1 — FELIZ CUMPLEAÑOS
+  ============================================================ -->
+  <section id="birthday" class="section section-centered fade-section">
+    <div class="birthday-content">
+      <p class="section-eyebrow">✨ FELIZ CUMPLEAÑOS ✨</p>
+      <h2 class="birthday-name">Michelle <span class="heart">❤️</span></h2>
+      <p class="birthday-message">
+        Hoy no quiero regalarte solamente algo material...<br />
+        quiero regalarte un pedacito de nuestro universo.
+      </p>
+      <button class="btn btn-primary next-btn" data-next="memories">CONTINUAR ❤️</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 2 — NUESTROS RECUERDOS (Galería)
+  ============================================================ -->
+  <section id="memories" class="section fade-section">
+    <h2 class="section-title">Nuestros recuerdos <span class="emoji">📸</span></h2>
+    <p class="section-subtitle">Cada fotografía guarda un pedacito de nosotros.</p>
+
+    <div id="gallery" class="gallery">
+      <div id="gallery-loading" class="gallery-loading">Cargando recuerdos <span class="dots">...</span></div>
+    </div>
+
+    <div class="section-actions">
+      <button class="btn btn-ghost back-btn" data-back="birthday">← Volver</button>
+      <button class="btn btn-primary next-btn" data-next="story">CONTINUAR ❤️</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 3 — NUESTRA HISTORIA (Línea del tiempo)
+  ============================================================ -->
+  <section id="story" class="section fade-section">
+    <h2 class="section-title">Nuestra historia <span class="emoji">🌌</span></h2>
+    <p class="section-subtitle">Todo comenzó el día en que nuestro universo se unió.</p>
+
+    <div id="timeline" class="timeline">
+      <!-- Los eventos se generan con JavaScript -->
+    </div>
+
+    <div class="section-actions">
+      <button class="btn btn-ghost back-btn" data-back="memories">← Volver</button>
+      <button class="btn btn-primary next-btn" data-next="qualities">CONTINUAR ❤️</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 4 — LO QUE AMO DE TI
+  ============================================================ -->
+  <section id="qualities" class="section fade-section">
+    <h2 class="section-title">Hay tantas cosas que amo de ti...</h2>
+    <p class="section-subtitle">Y cada día descubro una más.</p>
+
+    <div id="qualities-list" class="qualities-list">
+      <!-- Las tarjetas se generan con JavaScript -->
+    </div>
+
+    <div class="section-actions">
+      <button class="btn btn-ghost back-btn" data-back="story">← Volver</button>
+      <button class="btn btn-primary next-btn" data-next="letter">CONTINUAR ❤️</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 5 — MI CARTA PARA TI
+  ============================================================ -->
+  <section id="letter" class="section section-centered fade-section">
+    <div class="letter-container">
+      <h2 class="section-title">Una carta para ti <span class="emoji">💌</span></h2>
+      <div class="letter-paper">
+        <div id="letter-text" class="letter-text" aria-live="polite"></div>
+        <span id="letter-cursor" class="letter-cursor">|</span>
+      </div>
+      <button id="replay-letter-btn" class="btn btn-ghost">Leer nuevamente 💌</button>
+    </div>
+
+    <div class="section-actions">
+      <button class="btn btn-ghost back-btn" data-back="qualities">← Volver</button>
+      <button class="btn btn-primary next-btn" data-next="universe">CONTINUAR ✨</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 6 — NUESTRO UNIVERSO (Constelación)
+  ============================================================ -->
+  <section id="universe" class="section section-centered fade-section constellation-section">
+    <h2 class="section-title constellation-title">Nuestro Universo <span class="emoji">🌌</span></h2>
+    <svg id="constellation" class="constellation" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- Los puntos y líneas se dibujan con JavaScript -->
+    </svg>
+    <div class="constellation-text">
+      <p class="constellation-quote">
+        Porque contigo descubrí que algunas personas no llegan a nuestra vida por casualidad...
+      </p>
+      <p class="constellation-quote accent">...llegan para convertirse en parte de nuestro universo.</p>
+      <div class="constellation-hearts">❤️</div>
+    </div>
+
+    <div class="section-actions">
+      <button class="btn btn-ghost back-btn" data-back="letter">← Volver</button>
+      <button class="btn btn-primary next-btn" data-next="final">CONTINUAR ❤️</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN FINAL — SU CUMPLEAÑOS (Tarta y vela)
+  ============================================================ -->
+  <section id="final" class="section section-centered fade-section">
+    <div class="birthday-scene">
+      <p class="make-a-wish">Michelle, pide un deseo <span class="emoji">✨</span></p>
+
+      <div class="cake" aria-label="Tarta de cumpleaños">
+        <div class="cake-candle">
+          <div id="flame" class="flame"></div>
+          <div class="candle"></div>
+        </div>
+        <div class="cake-top"></div>
+        <div class="cake-middle"></div>
+        <div class="cake-bottom"></div>
+      </div>
+
+      <button id="blow-candle-btn" class="btn btn-primary">APAGAR LA VELA 🕯️</button>
+
+      <div id="final-message" class="final-message hidden">
+        <h2 class="final-title">Feliz cumpleaños, Michelle <span class="heart">❤️</span></h2>
+        <p class="final-text">Espero poder seguir escribiendo nuestra historia contigo.</p>
+        <p class="final-text">Este es solo el comienzo de nuestro universo.</p>
+        <p class="final-signature">Michelle & Bambam <span class="heart">❤️</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LIGHTBOX (Visor de fotografías)
+  ============================================================ -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Cerrar">✕</button>
+    <img id="lightbox-img" src="" alt="Fotografía ampliada" />
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </div>
+
+  <!-- Contenedor de partículas especiales (corazones/confeti) -->
+  <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
